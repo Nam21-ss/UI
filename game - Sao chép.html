@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bàn cờ kiểu Lichess</title>
+  <style>
+    @font-face {
+      font-family: 'Merida';
+      src: url('https://cdn.jsdelivr.net/gh/lichess-org/lila/fonts/merida/merida.ttf') format('truetype');
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #312e2b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Merida', sans-serif;
+    }
+
+    .chessboard {
+      display: grid;
+      grid-template-columns: repeat(8, 80px);
+      grid-template-rows: repeat(8, 80px);
+      border: 2px solid #222;
+    }
+
+    .square {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 56px;
+      cursor: default;
+    }
+
+    .white {
+      background-color: #f0d9b5;
+    }
+
+    .black {
+      background-color: #b58863;
+    }
+  </style>
+</head>
+<body>
+  <div class="chessboard" id="chessboard"></div>
+
+  <script>
+    const board = document.getElementById('chessboard');
+    const pieces = {
+      0: ['♜','♞','♝','♛','♚','♝','♞','♜'],
+      1: Array(8).fill('♟'),
+      6: Array(8).fill('♙'),
+      7: ['♖','♘','♗','♕','♔','♗','♘','♖']
+    };
+
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        const square = document.createElement('div');
+        square.classList.add('square');
+        square.classList.add((row + col) % 2 === 0 ? 'white' : 'black');
+        if (pieces[row]) {
+          square.textContent = pieces[row][col];
+        }
+        board.appendChild(square);
+      }
+    }
+  </script>
+</body>
+</html>
